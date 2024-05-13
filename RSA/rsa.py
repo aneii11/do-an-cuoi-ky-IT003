@@ -28,8 +28,32 @@ def RSA_decrypt(private_key, ciphertext):
     return long_to_bytes(plaintext_int)
 
 # Demo
-alice_public, alice_private = get_keys(2048)
-bob_public, bob_private = get_keys(2048)
+print("Here's a demo of RSA algorithm")
+
+print('''
+Key size selection:
+1. 256 bits
+2. 515 bits
+3. 1024 bits
+4. 2048 bits
+      ''')
+key_size = 0
+option = int(input('Enter the option for key size: '))
+match option:
+    case 1:
+        key_size = 256
+    case 2:
+        key_size = 512
+    case 3:
+        key_size = 1024
+    case 4: 
+        key_size = 2048
+    case default:
+        key_size = 0
+assert key_size != 0, "Invalid option"
+
+alice_public, alice_private = get_keys(key_size)
+bob_public, bob_private = get_keys(key_size)
 message = b"Hello, this message is going to be encrypted by RSA algorithm"
 print('\nAlice\s keys: ')
 print(f'Public key: {alice_public}')
@@ -38,11 +62,18 @@ print('\nBob\'s keys: ')
 print(f'Public key: {bob_public}')
 print(f'Private key: {bob_private}')
 print(f'Plain message: {message}')
-print('\nNow Alice encrypt message and send to Bob')
+print('\nNow Alice encrypt the message and send to Bob')
 encrypted_message = RSA_encrypt(bob_public, message)
-print(f'\nEncrypted message: {encrypted_message}')
-print('\nBob received encrypted message and decrypt it')
+print(f'\nEncrypted message to send to Bob: {encrypted_message}')
+print('\nBob received encrypted message and decrypt it.')
 decrypted_message = RSA_decrypt(bob_private, encrypted_message)
 assert message == decrypted_message
-print(f'Decrpyted message: {decrypted_message}')
+print(f'Decrpyted message by Bob: {decrypted_message}')
+print('\nNow it\'s your turn. Input your message and we will encrypt it with Alice\'s keys and sent to Alice.')
+your_msg = str(input('Your message: ')).encode()
+encrypted_ur_msg = RSA_encrypt(alice_public,your_msg)
+print(f'\nEncrypted message to send to Alice: {encrypted_ur_msg}')
+print(f'\nAlice received the message and decrypt it.')
+decrypted_ur_msg = RSA_decrypt(alice_private,encrypted_ur_msg)
+print(f'Decrypted message by Alice: {decrypted_ur_msg}')
     

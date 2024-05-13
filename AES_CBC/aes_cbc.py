@@ -32,6 +32,7 @@ def aes_cbc_decrypt(key, ciphertext):
 
 key = random.getrandbits(128)
 key = long_to_bytes(key)
+print('Here\'s a demo of AES_CBC encrypting algorithm.\n')
 message = b'Hello world, this message gonna be encrypted by AES CBC.'
 encrypted_msg = aes_cbc_encrypt(key,message)
 print(f'Key used: {hex( bytes_to_long(key))}')
@@ -39,3 +40,9 @@ print(f'Message: {message}\n')
 print(f'Encrypted message: {encrypted_msg}\n' )
 decrypted_msg = aes_cbc_decrypt(key,encrypted_msg)
 print(f'Decrypted message: {decrypted_msg}')
+print('Now it\'s your turn. Enter the message to encrypt using AES_CBC. ')
+ur_msg = str(input('Your message: ')).encode()
+encrypt_ur_msg = aes_cbc_encrypt(key, ur_msg)
+print(f'\nYour message has been encrypted: {encrypt_ur_msg}')
+decrypt_ur_msg = aes_cbc_decrypt(key, encrypt_ur_msg)
+print(f'\nDecrypted your message: {decrypt_ur_msg}')
