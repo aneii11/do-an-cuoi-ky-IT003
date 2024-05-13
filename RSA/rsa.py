@@ -29,7 +29,6 @@ def RSA_decrypt(private_key, ciphertext):
 
 # Demo
 print("Here's a demo of RSA algorithm")
-
 print('''
 Key size selection:
 1. 256 bits

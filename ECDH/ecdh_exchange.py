@@ -93,7 +93,7 @@ print(f'Bob\'s public key: {QB}')
 # Get shared secret
 KA = ecdh_get_shared_secret(a,b,p,QB,nA)
 KB = ecdh_get_shared_secret(a,b,p,QA,nB)
-# This part is just for demo. In pratice, both parties don't need to check if their secret is equal
+# This part is just for demo. In pratice, both parties don't need to check if their secret is equal.
 assert KA == KB, "Shared secrets are not equals"
 print(f'\nShared secret is: {KA}')
 
