@@ -44,8 +44,6 @@ def ecdh_get_shared_secret(a,b,p,Q,n):
     return ecc_multiply(Q,n,a,b,p)
 
 # Demo
-# Curves parameters. We are using secp256r1 curve 
-  
 print("This is a demo for ECDH key exchange algorithm.")
 print("Key size selection")
 print('''
