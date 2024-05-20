@@ -42,21 +42,23 @@ match option:
         key_size = 0
 assert key_size != 0, "Invalid option"
 
-private_key, public_key = generate_RSA_key_pair(key_size=key_size)
-
+alice_private, alice_public = generate_RSA_key_pair(key_size=key_size)
+bob_private, bob_public = generate_RSA_key_pair(key_size)
 # Encrypting a sample string
 plaintext = b"Hello, this message is going to be encrypted by RSA algorithm."
+print('Now Alice encrypt the message and send to Bob\n')
+encrypted = encrypt_RSA(plaintext, bob_public)
 
-encrypted = encrypt_RSA(plaintext, public_key)
-decrypted = decrypt_RSA(encrypted, private_key)
-
-print(f"Plaintext: {plaintext}\n")
-print(f"Encrypted: 0x{encrypted.hex()}\n")
-print("Decrypted:", decrypted.decode())
-print('Now it\'s your turn. Send me a message and I will encrypt it with RSA')
+print(f"Message: {plaintext}\n")
+print(f'\nEncrypted message to send to Bob: 0x{encrypted.hex()}')
+print('\nBob received encrypted message and decrypt it.')
+decrypted = decrypt_RSA(encrypted, bob_private)
+assert plaintext == decrypted
+print(f'Decrpyted message by Bob: {decrypted}')
+print('\nNow it\'s your turn. Input your message and we will encrypt it with Alice\'s keys and sent to Alice.')
 your_msg = str(input('Your message: ')).encode()
-encrypted_ur_msg = encrypt_RSA(your_msg, public_key)
+encrypted_ur_msg = encrypt_RSA(your_msg, alice_public)
 print(f'\nEncrypted message to send to Alice: 0x{encrypted_ur_msg.hex()}')
 print(f'\nAlice received the message and decrypt it.')
-decrypted_ur_msg = decrypt_RSA(encrypted_ur_msg,private_key)
+decrypted_ur_msg = decrypt_RSA(encrypted_ur_msg,alice_private)
 print(f'Decrypted message by Alice: {decrypted_ur_msg}')
