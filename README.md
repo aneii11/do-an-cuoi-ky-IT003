@@ -4,5 +4,5 @@
 ```bash
 $ git clone https://github.com/aneii11/do-an-cuoi-ky-IT003
 $ cd do-an-cuoi-ky-IT003
-$ pip install -r requirement.txt
+do-an-cuoi-ky-IT003$ pip install -r requirement.txt
 ```
